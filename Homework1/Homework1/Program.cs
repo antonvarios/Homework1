@@ -23,47 +23,13 @@ namespace Homework1
 
             // 2 - Multiplication table
             
-                bool flag1 = true;
-                int no = 0;
-                do
-                {
-                Console.Write("Enter a number for the 'multiplication table' :");
-                string s1 = Console.ReadLine();
-                    string[] inputs1 = s1.Split();
-                    if (inputs1.Length > 1)
-                    {
-                        Console.WriteLine("Wrong Entry Repeat");
-                    }
-                    else
-                    {
-                        if (int.TryParse(inputs1[0], out no))
-                        {
-                            if (no <= 0)
-                            {
-                                Console.WriteLine("You entered an invalid number");
-                                Console.WriteLine("The number must be greater than 0 ");
-                            }
-                            else
-                            {
-                                flag1 = false;
-                            }
-                           
-                        }
-                        else
-                        {
-                            Console.WriteLine("Wrong Entry, Repeat");
-                        }
-                    }
-
-                } while (flag1);
-
+            int no = GetPositiveInteger("Enter a number for the 'multiplication table' : ", "Wrong Entry Repeat", "The number must be greater than 0 "); ;
             Multi_table(no);
-
-
+            
             // 3 - Arrays Max, Min, Average 
 
-            Console.Write("Enter the size of the Array of integers: ");
-            int ArrSize = Convert.ToInt32(Console.ReadLine());
+            
+            int ArrSize = GetPositiveInteger("Enter the size of the Array of integers : ", "Wrong Entry Repeat", "The number must be greater than 0 ");
             int [] arr = new int[ArrSize];
             Console.WriteLine();
             for (int i = 0; i < arr.Length; i++)
@@ -181,6 +147,44 @@ namespace Homework1
             return EntDecimal;
         }
 
+        static int GetPositiveInteger(string s1, string s2, string s3)
+        {
+            int EntInt = 0;
+            bool fl = true;
+
+            do
+            {
+                Console.Write(s1);
+                string s = Console.ReadLine();
+                string[] inputs = s.Split();
+                if (inputs.Length > 1)
+                {
+                    Console.WriteLine(s2);
+                }
+                else
+                {
+                    if (int.TryParse(inputs[0], out EntInt))
+                    {
+                        if (EntInt <= 0)
+                        {
+                            Console.WriteLine(s2);
+                            Console.WriteLine(s3);
+                        }
+                        else
+                        {
+                            fl = false;
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine(s2);
+                    }
+                }
+
+            } while (fl);
+            return EntInt;
+        }
 
     }
 }
